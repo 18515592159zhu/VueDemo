@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <!--3.使用局部组件-->
+    <!--使用 v-bind 形式将数据绑定到Vue实例中data属性中 日后data属性发生变化 组件内部数据跟着变化-->
+    <login :name="username" :age="age"><</login>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+
+    //1.声明组件模板对象
+    const login = {
+        template: `<div><h2>欢迎：{{name}} 年龄:{{age}}</h2></div>`,
+        props: ["name", "age"],
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "组件之间数据传递",
+            username: "小朱11",
+            age: 21,
+        },
+        methods: {},
+        computed: {},
+        components: {//注册组件
+            login,//2.注册局部组件
+        }
+    })
+</script>

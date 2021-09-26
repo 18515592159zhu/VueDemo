@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+
+    <!--4.显示路由的组件-->
+    <router-view></router-view>
+
+    <!--5.根据链接切换路由-->
+    <a href="#/login">点我登录</a>
+    <a href="#/register">点我注册</a>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+
+    //1.声明组件模板对象
+    const login = {
+        template: `<div><h2>用户登录</h2></div>`,
+    }
+
+    const register = {
+        template: `<div><h2>用户注册</h2></div>`,
+    }
+
+    //2.定义路由对象的规则
+    //创建路由对象
+    const router = new VueRouter({
+        routes: [
+            {path: '/login', component: login},//path：路由的路径 component：路径对应的组件
+            {path: '/register', component: register},
+        ]
+    });
+
+    //3.将路由对象注册到Vue实例中
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "Vue router 基本使用"
+        },
+        methods: {},
+        router: router,//设置路由对象
+    })
+</script>

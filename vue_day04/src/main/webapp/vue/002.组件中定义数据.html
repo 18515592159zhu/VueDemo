@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <!--使用局部组件-->
+    <login></login>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+
+    //组件声明的配置对象
+    const login = {
+        template: `<div><h2>{{msg}} 百度一下，你就知道</h2><ul><li v-for="item,index in lists">{{index+1}}. {{item}}</li></ul></div>`,
+        data() {//使用data函数方式定义组件的数据   在templatehtml代码中通过插值表达式直接获取
+            return {
+                msg: "hello",
+                lists: ["java", "python", "c++", "ios"],//组件自己内部数据
+            }
+        }
+    }
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "组件之间数据传递",
+        },
+        methods: {},
+        computed: {},
+        components: {//注册组件
+            login,//注册局部组件
+        }
+    })
+</script>

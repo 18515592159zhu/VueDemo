@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <!--局部组件使用 在Vue实例作用范围内-->
+    <login></login>
+</div>
+</body>
+</html>
+<script src="js/axios.min.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    //局部组件登录模板声明
+    let login = {//具体局部组件名称
+        template: `<div><h2>用户登录</h2></div>`,
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "vue中组件之全局组件、局部组件使用",
+        },
+        methods: {},
+        computed: {},
+        components: {//用来注册局部组件
+            //login:login,
+            //简写：
+            login,
+        }
+    })
+</script>

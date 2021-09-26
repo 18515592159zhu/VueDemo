@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue系列课程之基础入门</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{msg}} </h2>
+    <h2>年龄：{{count}}</h2>
+
+    <button v-on:click="incrementAge">点我每次给年龄+1</button>
+    <button v-on:click="changeAge(40)">点我每次给年龄+不确定</button>
+    <button v-on:click="changeAgeAndMsg({count:2, msg:'i love vue'})">点我每次给年龄+不确定，同时msg不确定</button>
+</div>
+</body>
+</html>
+<!--引入核心js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {//用来定义数据
+            msg: "Hello Vue",
+            count: 23
+        },
+        methods: {//用来定义方法
+            incrementAge: function () {
+                this.count++;
+            },
+            changeAge: function (count) {
+                console.log(count);
+                this.count += count;
+            },
+            changeAgeAndMsg: function (param) {
+                console.log(param);
+                this.count += param.count;
+                this.msg = "hello vue" + param.msg;
+            }
+        }
+    })
+</script>

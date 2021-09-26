@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{msg}}</h2>
+    <div class="aa" @click="divClick">
+        <!--用来阻止事件冒泡-->
+        <!--当点击button按钮时，不会触发divClick-->
+        <input type="button" value="按钮" @click.stop="btnClick">
+    </div>
+</div>
+</body>
+</html>
+<!--引入核心js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello vue"
+        },
+        methods: {
+            divClick() {
+                alert("div被点击了...")
+            },
+            btnClick() {
+                alert("button被点击了...")
+            }
+        }
+    })
+</script>

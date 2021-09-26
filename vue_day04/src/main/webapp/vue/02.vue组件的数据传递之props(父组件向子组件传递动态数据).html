@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <!--
+        向子组件中传递动态数据  使用props机制：即可以传递静态数据也可以传递动态数据
+            传递静态数据：组件标签上声明 key=value    组件内部使用props数组进行声明 对应接收key
+            传递动态数据：组件标签上声明 :key="value" 组件内部使用props数组进行声明 对应接收key
+    -->
+
+    <!--双向绑定-->
+    <input type="text" v-model="name">
+    <input type="text" v-model="msg">
+    <!--使用局部组件-->
+    <login :name="name" :msg="msg"></login>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+
+    //定义组件配置对象
+    const login = {
+        template: `<div><h2>用户登录--{{name}}--{{msg}}</h2></div>`,
+        props: ['name', 'msg'],//用来接收父组件给当前组件传递数据  注意:props机制接收数据就相当于自己组件data中声明一个这样数据
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "组件间数据传递",
+            name: "我是vue实例管理数据",
+        },
+        methods: {},
+        computed: {},
+        components: {//注册局部组件
+            login,
+        }
+    })
+</script>

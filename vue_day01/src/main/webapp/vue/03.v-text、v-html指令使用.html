@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <title>vue系列课程之基础入门</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{msg}}</h2>
+    <h2>{{msg}} hello {{msg}} 小朱 {{msg}}</h2>
+
+    <h2>小朱 <span v-text="msg"></span></h2>
+    <h2 v-html="msg">{{msg}}</h2>
+
+    <h2>{{content}}</h2>
+    <h2 v-text="content"></h2>
+    <h2 v-html="content"></h2>
+    <!--
+        v-text  和   v-html：作用：用来获取vue实例中data属性声明的数据
+                            使用语法：在哪个标签上获取直接在哪个标签上定义 v-text v-html
+                                     v-text="属性名"
+        {{}} 取值 和 v-text 取值区别；
+            1.{{}}取值不会将标签原始数据清空  使用v-text取值清空标签原始数据  {{}}===>这种方式取值 插值表达式
+            2.{{}}取值存在插值闪烁   v-text v-html取值 不存在插值闪烁
+
+            推荐: 两种方式都可以使用  {{}} 更加灵活
+
+        v-text (innerText)、  v-html (innerHtml)区别：
+             1.使用v-text取值:直接将获取数据渲染到指定标签中
+             2.使用v-html取值:先将获取数据进行html标签解析,解析之后在渲染到指定标签中
+    -->
+</div>
+</body>
+</html>
+<!--引入核心js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: "Hello Vue",
+            content: "<a href='http://www.baidu.com/'>点我查看详细</a>"
+        }
+    })
+</script>

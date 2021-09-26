@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue系列课程之基础入门</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <h1>{{username}}</h1>
+    <h1>{{password}}</h1>
+    <h4>{{username.toUpperCase()}}</h4>
+    <h4>{{username.length}}</h4>
+    <h4>{{username == "hello vue"}}</h4>
+</div>
+</body>
+</html>
+<!--引入核心js文件-->
+<script src="js/vue.js"></script>
+<!--书写vue的代码-->
+<script>
+    //创建一个vue实例
+    var app = new Vue({
+        el: "#app",//element：用来给Vue实例定义一个作用范围
+        data: {    //用来给Vue实例定义一些相关数据，自定义各种数据
+            msg: "Vuejs欢迎你，期待你的加入",
+            username: "Hello Vue！",
+            content: "hello vue",
+            password: "123456"
+        }
+    })
+</script>

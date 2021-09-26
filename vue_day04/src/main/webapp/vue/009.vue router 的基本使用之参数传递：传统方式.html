@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+
+    <!--queryString-->
+    <router-link to="/login?id=21&name=zhangsan">我要登录</router-link>
+
+    <!--展示路由组件标签-->
+    <router-view/>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+
+    //login
+    const login = {
+        template: `<div><h4>用户登录</h4></div>`,
+        data() {
+            return {}
+        },
+        created() { //生命周期 在执行时已经完成组件内部事件 和 生命周期函数注册 自身 data methods computed属性注入和校验
+            console.log("=================" + this.$route.query.id + "================" + this.$route.query.name);
+        }
+    };
+
+
+    //创建路由规则对象
+    const router = new VueRouter({
+        routes: [
+            {path: '/login', component: login, name: 'Login'},
+        ],
+    })
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "vue router 的基本使用之参数传递"
+        },
+        methods: {},
+        router,//注册路由对象
+    })
+</script>

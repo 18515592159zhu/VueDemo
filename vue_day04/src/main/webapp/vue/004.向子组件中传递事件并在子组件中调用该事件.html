@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <!--3.使用子组件-->
+    <!--在组件内部使用  this.$emit('find')-->
+    <login @find="findAll" :name="name"></login>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script>
+
+    //1.声明组件
+    const login = {
+        template: "<div><h1>百度一下 {{ uname }}</h1> <input type='button' value='点我' @click='change'></div>",
+        data() {
+            return {
+                uname: this.name
+            }
+        },
+        props: ['name'],
+        methods: {
+            change() {
+                //调用vue实例中函数
+                this.$emit('find');  //调用组件传递过来的其他函数时需要使用 this.$emit('函数名调用')
+            }
+        }
+    }
+
+    //2.注册组件
+    const app = new Vue({
+        el: "#app",
+        data: {
+            name: "小朱"
+        },
+        methods: {
+            findAll() {  //一个事件函数  将这个函数传递给子组件
+                alert('Vue 实例中定义函数');
+            }
+        },
+        components: {
+            login,//组件的注册
+        }
+    });
+</script>

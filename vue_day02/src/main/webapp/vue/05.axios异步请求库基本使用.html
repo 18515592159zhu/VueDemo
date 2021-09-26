@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>Axios的基本使用</h1>
+</div>
+</body>
+</html>
+<script src="js/axios.min.js"></script>
+
+<script>
+    /*
+    //发送axios的get方式请求
+    axios.get("http://localhost:8081/demo?id=21&name=xiaozhu").then(function (response) {
+        console.log(response);
+        console.log(response.data);
+    }).catch(function (error) {
+        console.log(error);
+    })
+
+    //发送一个post方式请求
+    axios.post("http://localhost:8081/test", {id: 21, name: "xiaozhu"}).then(function (response) {
+        console.log(response);
+        console.log(response.data);//响应结果
+    }).catch(function (error) {
+        console.log(error);
+    })
+
+    //发送put方式请求
+    axios.put("http://localhost:8081/test1", {id: 22, name: "xiaoli"}).then(function (response) {
+        console.log(response);
+        console.log(response.data);//响应结果
+    }).catch(function (error) {
+        console.log(error);
+    })
+    */
+
+    //创建axios的配置对象（实例）
+    var instance = axios.create({
+        baseURL: "http://localhost:8081/",
+        timeout: 5000,
+    })
+
+    //请求拦截器
+    instance.interceptors.request.use(function (config) {
+        console.log(config);
+        if (config.url.indexOf("?") == -1) {
+            config.url += "?token=1234"
+        } else {
+            config.url += "&token=1234";
+        }
+        return config;
+    });
+
+    //响应拦截器
+    instance.interceptors.response.use(function (response) {
+        console.log(response);
+        //response.data = "xxx";
+        if (response.status == 500) {
+            alert("服务器出现错误！")
+        }
+        return response;
+    })
+
+    //发送get方式请求
+    instance.get("/demo?id=23&name=xiaozhang").then(function (response) {
+        console.log(response);
+        console.log(response.data);
+    }).catch(function (error) {
+        console.log(error);
+    })
+
+    //发送post方式请求
+    instance.post("/test", {id: 12, name: "xiaowang"}).then(function (response) {
+        console.log(response);
+        console.log(response.data);
+    }).catch(function (error) {
+        console.log(error);
+    })
+
+    //并发请求
+    function getDemoMethod() {
+        return instance.get("/demo?id=33&name=xiaoxiao")
+    }
+
+    function getTestMethod() {
+        return instance.post("/test", {id: 44, name: "xiaowu"});
+    }
+
+    axios.all([getDemoMethod(), getTestMethod()]).then(axios.spread(function (acct, perms) {
+        //两个请求现在都执行完成
+        console.log(acct);
+        console.log(perms);
+    }))
+
+</script>

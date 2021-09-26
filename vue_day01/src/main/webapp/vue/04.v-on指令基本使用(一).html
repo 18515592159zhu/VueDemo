@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue系列课程之基础入门</title>
+</head>
+<body>
+<div id="app">
+    <h2>年龄：{{age}}</h2>
+
+    <input type="button" value="通过v-on事件修改年龄每次+1" v-on:click="changeAge">
+    <input type="button" value="通过@绑定事件修改年龄每次-1" @click="editAge">
+
+</div>
+</body>
+</html>
+<!--引入核心js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",//用来指定Vue实例作用范围
+        data: {    //用来给vue实例绑定一系列数据
+            age: 23
+        },
+        methods: {  //用来给vue实例绑定一系列函数 方法
+            changeAge: function () {
+                this.age++;
+            },
+            editAge: function () {
+                this.age--;
+            }
+        }
+    })
+</script>

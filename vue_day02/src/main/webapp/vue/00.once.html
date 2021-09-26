@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h2>{{msg}}</h2>
+    <!--
+        .prevent：用来阻止事件的默认行为
+        .once：用来只执行一次特定的事件
+    -->
+    <a href="http://www.baidu.com/" @click.prevent.once="aClick">百度一下，你就知道</a>
+</div>
+</body>
+</html>
+<!--引入核心js文件-->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello vue"
+        },
+        methods: {
+            aClick() {
+                alert("百度一下，你就知道")
+            }
+        }
+    })
+</script>

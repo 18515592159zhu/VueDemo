@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue之系列课程</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+
+    <!--
+        标签形式切换路由
+
+        地址栏传递参数分为两种方式：
+            1.queryString  ?传参              this.$route.query.key
+            2.restful      路径传递参数 /xx    this.$route.params.key
+    -->
+    <a href="#/login?name=xiaozhu&password=123456">用户登录</a>
+    <a href="#/register/21/xiaozhu">用户注册</a>
+
+    <!--query-->
+    <router-link to="/login?name=xiaohei&password=123456">用户登录</router-link>
+    <router-link :to="{path:'/login',query:{name:'xiaowang',password:123456}}">用户登录</router-link>
+    <router-link :to="{name:'Login',query:{name:'xiaoli',password:1234567}}">用户登录</router-link>
+
+    <!--restful-->
+    <router-link :to="{path:'/register/22/xiaohong'}">用户注册</router-link>
+    <router-link :to="{name:'Register',params:{id:22,name:'xiaojiang'}}">用户注册</router-link>
+
+    <!--切换路由 使用router-link-->
+    <!--<router-link :to="{name:'Login'}">用户登录</router-link>
+    <router-link :to="{name:'Register'}">用户注册</router-link>-->
+
+    <!--展示路由组件标签-->
+    <router-view/>
+</div>
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script>
+
+    //login
+    const login = {
+        template: `<div><h4>用户登录</h4></div>`,
+        created() { //生命周期 在执行时已经完成组件内部事件和生命周期函数注册 同时自身data、methods、computed属性注入和校验
+            console.log("created");
+            console.log(this.$route);//获取当前路由对象
+            console.log("name：" + this.$route.query.name);//获取当前路由对象
+            console.log("password：" + this.$route.query.password);//获取当前路由对象
+        }
+    };
+
+    //register
+    const register = {
+        template: `<div><h4>用户注册</h4></div>`,
+        created() {
+            console.log(this.$route);
+            console.log(this.$route.params.id);
+            console.log(this.$route.params.name);
+        }
+    };
+
+    //创建路由规则对象
+    const router = new VueRouter({
+        routes: [
+            {path: '/login', component: login, name: 'Login'},
+            {path: '/register/:id/:name', component: register, name: 'Register'},
+        ],
+    })
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "vue router 的基本使用之参数传递"
+        },
+        methods: {},
+        router,//注册路由对象
+    })
+</script>
